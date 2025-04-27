@@ -9,11 +9,13 @@ import HelloWorld from './components/HelloWorld.vue'
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
+      <hr />
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/form">Form</RouterLink>
       </nav>
+      <hr />
     </div>
   </header>
 
@@ -81,5 +83,12 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+
+hr {
+  border: none; /* 移除默认边框 */
+  border-top: 1px solid var(--color-border); /* 添加一个细的上边框，颜色使用现有的 CSS 变量 */
+  margin: 1.5rem 0; /* 增加垂直方向的外边距 */
+  opacity: 0.6; /* 让线条稍微透明一些 */
 }
 </style>
