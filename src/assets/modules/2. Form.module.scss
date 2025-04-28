@@ -1,0 +1,143 @@
+$form-bg: #f8fafc;
+$form-border: #e0e6ed;
+$form-radius: 8px;
+$form-shadow: 0 2px 12px rgba(49, 85, 108, 0.08);
+$form-label: #34495e;
+$form-title: #2980b9;
+$form-input: #fff;
+$form-input-border: #bfc9d1;
+$form-input-focus: #3498db;
+$form-selected: #eaf6fb;
+
+.form {
+    max-width: 420px;
+    margin: 48px auto 0 auto;
+    padding: 36px 28px 28px 28px;
+    background: $form-bg;
+    border-radius: $form-radius;
+    box-shadow: $form-shadow;
+    border: 1px solid $form-border;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .form-group {
+        background: #fff;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(49, 85, 108, 0.04);
+        padding: 18px 16px 10px 16px;
+        margin-bottom: 12px;
+        border: 1px solid #f0f3f7;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .form-group h2 {
+        border-bottom: none;
+        margin-bottom: 4px;
+        font-size: 17px;
+        color: #2980b9;
+        padding: 0;
+    }
+
+    label {
+        color: $form-label;
+        margin-left: 6px;
+        font-size: 15px;
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+    .form-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+    }
+
+    .form-row input[type='checkbox'],
+    .form-row input[type='radio'] {
+        margin-right: 4px;
+        margin-left: 0;
+    }
+    .form-row label {
+        margin-right: 16px;
+        margin-left: 0;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    textarea,
+    select {
+        width: 100%;
+        padding: 8px 12px;
+        margin: 6px 0 12px 0;
+        border: 1px solid $form-input-border;
+        border-radius: 4px;
+        background: $form-input;
+        font-size: 15px;
+        transition: border 0.2s;
+        outline: none;
+        box-sizing: border-box;
+        &:focus {
+            border-color: $form-input-focus;
+            background: $form-selected;
+        }
+    }
+
+    input[type='checkbox'],
+    input[type='radio'] {
+        accent-color: $form-input-focus;
+        margin-right: 4px;
+        transform: scale(1.1);
+        vertical-align: middle;
+    }
+
+    p {
+        color: #888;
+        font-size: 14px;
+        margin: 4px 0 12px 0;
+        background: #f4f8fb;
+        border-radius: 4px;
+        padding: 4px 8px;
+        display: inline-block;
+    }
+
+    select[multiple] {
+        min-height: 70px;
+        padding: 6px;
+        option {
+            padding: 4px 8px;
+            margin: 2px 0;
+            border-radius: 3px;
+            &:checked {
+                background: $form-selected;
+            }
+        }
+    }
+
+    input[type='file'] {
+        width: 100%;
+        padding: 8px;
+        margin: 6px 0;
+        border: 1px dashed $form-input-border;
+        border-radius: 4px;
+        background: $form-bg;
+        cursor: pointer;
+        &:hover {
+            border-color: $form-input-focus;
+            background: $form-selected;
+        }
+    }
+
+    input[type='range'] {
+        width: 100%;
+        max-width: 300px;
+        accent-color: $form-input-focus;
+    }
+}
