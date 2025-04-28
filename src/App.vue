@@ -1,94 +1,77 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <hr />
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/form">Form</RouterLink>
-      </nav>
-      <hr />
+    <div class="app-container">
+        <header class="app-header">
+            <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+            <nav class="app-nav">
+                <RouterLink to="/">Home</RouterLink>
+                <RouterLink to="/about">About</RouterLink>
+                <RouterLink to="/project">Project</RouterLink>
+            </nav>
+        </header>
+        <main class="app-main">
+            <div class="content-area">
+                <RouterView />
+            </div>
+        </main>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 使容器占满整个视口高度 */
+}
+
+.app-header {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    padding: 10px 20px;
+    background-color: #f8f9fa; /* 添加背景色以便区分 */
+    border-bottom: 1px solid #dee2e6; /* 添加底部边框 */
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+    margin-right: 20px; /* logo 和导航栏之间的间距 */
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
+.app-nav {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+    gap: 15px; /* 导航链接之间的间距 */
 }
 
-hr {
-  border: none; /* 移除默认边框 */
-  border-top: 1px solid var(--color-border); /* 添加一个细的上边框，颜色使用现有的 CSS 变量 */
-  margin: 1.5rem 0; /* 增加垂直方向的外边距 */
-  opacity: 0.6; /* 让线条稍微透明一些 */
+.app-nav a {
+    text-decoration: none;
+    color: #495057;
+}
+
+.app-nav a.router-link-exact-active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.app-main {
+    display: flex;
+    flex-grow: 1; /* 使主内容区域填充剩余空间 */
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+.app-sidebar {
+    width: 200px; /* 侧边栏宽度 */
+    border-right: 1px solid #dee2e6; /* 添加右边框 */
+    padding: 15px;
+    background-color: #f1f3f5; /* 侧边栏背景色 */
+    overflow-y: auto; /* 如果内容过多则允许滚动 */
+}
+
+.content-area {
+    flex-grow: 1; /* 内容区域填充剩余空间 */
+    padding: 30px; /* Increased padding for better spacing */
+    overflow-y: auto; /* 如果内容过多则允许滚动 */
+    box-sizing: border-box; /* Ensure padding is included within the element's total width and height */
 }
 </style>
