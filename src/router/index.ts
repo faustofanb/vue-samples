@@ -1,5 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ProjectView from '../views/ProjectView.vue'
+
+// 自动导入small_project下的所有组件
+const modules = import.meta.glob('../components/small_project/*.vue')
+
+// 生成动态路由配置
+const smallProjectRoutes = Object.entries(modules).map(([path, component]) => {
+    const name = path.match(/\/([^/]+)\.vue$/)?.[1] || ''
+    return {
+        path: `/project/${name.toLowerCase()}`,
+        name,
+        component,
+    }
+})
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,34 +26,14 @@ const router = createRouter({
         {
             path: '/about',
             name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (About.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
             component: () => import('../views/AboutView.vue'),
         },
-
         {
             path: '/project',
             name: 'project',
-            component: () => import('../views/ProjectView.vue'),
-            children: [
-                {
-                    path: '/project/form',
-                    name: 'form',
-                    component: () => import('@/components/small_project/Form.vue'),
-                },
-                {
-                    path: '/project/fetch',
-                    name: 'fetch',
-                    component: () => import('@/components/small_project/FetchData.vue'),
-                },
-                {
-                    path: '/project/3d-boxes-background',
-                    name: '3d-boxes-background',
-                    component: () => import('@/components/small_project/3dBoxesBackground.vue'),
-                }
-            ]
-        }
+            component: ProjectView,
+            children: smallProjectRoutes,
+        },
     ],
 })
 

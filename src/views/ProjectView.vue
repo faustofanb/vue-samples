@@ -1,13 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+
+const modules = import.meta.glob('../components/small_project/*.vue')
+const links = Object.keys(modules).map((path) => {
+    const name = path.match(/\/([^/]+)\.vue$/)?.[1] || ''
+    return {
+        path: `/project/${name.toLowerCase()}`,
+        name: name.replace(/([A-Z])/g, ' $1').trim(), // 添加空格在大写字母前
+    }
+})
 </script>
 
 <template>
     <div class="project-view-wrapper">
         <nav class="project-nav">
-            <RouterLink to="/project/form">Form Example</RouterLink>
-            <RouterLink to="/project/fetch">Data Fetching</RouterLink>
-            <RouterLink to="/project/3d-boxes-background">3D Boxes</RouterLink>
+            <RouterLink v-for="link in links" :key="link.path" :to="link.path">
+                {{ link.name }}
+            </RouterLink>
         </nav>
         <div class="project-content">
             <RouterView />
