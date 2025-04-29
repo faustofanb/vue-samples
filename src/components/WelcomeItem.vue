@@ -1,39 +1,62 @@
 <template>
-    <div class="item flex relative mt-8 md:mt-0 md:px-0 md:py-1 md:pl-[calc(var(--section-gap)/2)]">
-        <i
-            class="flex items-center justify-center w-8 h-8 text-[var(--color-text)] md:absolute md:top-1/2 md:left-[-26px] md:border md:border-[var(--color-border)] md:bg-[var(--color-background)] md:rounded-lg md:w-[50px] md:h-[50px]"
-        >
-            <slot name="icon"></slot>
-        </i>
-        <div class="details flex-1 ml-4">
-            <h3 class="text-[1.2rem] font-medium mb-2 text-[var(--color-heading)]">
+    <div class="item">
+        <div class="icon-col">
+            <i class="icon">
+                <slot name="icon"></slot>
+            </i>
+        </div>
+        <div class="content-col">
+            <h3 class="title">
                 <slot name="heading"></slot>
             </h3>
-            <slot></slot>
+            <div class="details">
+                <slot></slot>
+            </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-.item:before,
-.item:after {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
+<script setup lang="ts">
+// ...existing code...
+</script>
+
+<style scoped lang="scss">
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
-.item:before {
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
+.icon-col {
+    flex: 0 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
 }
-.item:after {
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
 }
-.item:first-of-type:before {
-    display: none;
+.content-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
 }
-.item:last-of-type:after {
-    display: none;
+.title {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #222;
+    margin: 0 0 8px 0;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+}
+.details {
+    flex: 1;
 }
 </style>

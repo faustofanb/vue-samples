@@ -10,6 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
                 <RouterLink to="/project">Project</RouterLink>
+                <RouterLink to="/challenge">Challenge</RouterLink>
             </nav>
         </header>
         <main class="app-main">
@@ -29,29 +30,56 @@ import { RouterLink, RouterView } from 'vue-router'
 
 .app-header {
     display: flex;
-    align-items: center; /* 垂直居中对齐 */
-    padding: 10px 20px;
-    background-color: #f8f9fa; /* 添加背景色以便区分 */
-    border-bottom: 1px solid #dee2e6; /* 添加底部边框 */
+    align-items: center;
+    padding: 18px 32px;
+    background: #fff;
+    border-bottom: 1px solid #e0e6ed;
+    box-shadow: 0 2px 8px 0 rgba(60, 60, 60, 0.06);
+    border-radius: 0 0 12px 12px;
+    min-height: 70px;
 }
-
 .logo {
-    margin-right: 20px; /* logo 和导航栏之间的间距 */
+    margin-right: 20px;
+    border-radius: 8px;
+    box-shadow: none;
+    border: none;
+    background: none;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    display: block;
 }
-
 .app-nav {
     display: flex;
-    gap: 15px; /* 导航链接之间的间距 */
+    gap: 18px;
+    background: #f7f8fa;
+    padding: 6px 18px;
+    border-radius: 20px;
+    box-shadow: 0 1px 4px 0 rgba(60, 60, 60, 0.04);
+    border: none;
 }
-
 .app-nav a {
     text-decoration: none;
     color: #495057;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 14px;
+    transition:
+        background 0.2s,
+        color 0.2s;
+    background: transparent;
+    display: inline-block;
+    border: none;
 }
-
+.app-nav a:hover {
+    background: #e3e9f3;
+    color: #2563eb;
+}
 .app-nav a.router-link-exact-active {
     font-weight: bold;
-    color: #007bff;
+    color: #fff;
+    background: linear-gradient(90deg, #69e8ca 60%, #68eab0 100%);
+    box-shadow: 0 2px 8px 0 rgba(60, 60, 60, 0.1);
 }
 
 .app-main {
@@ -70,7 +98,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 .content-area {
     flex-grow: 1; /* 内容区域填充剩余空间 */
-    padding: 30px; /* Increased padding for better spacing */
+    /* padding: 30px; Increased padding for better spacing */
     overflow-y: auto; /* 如果内容过多则允许滚动 */
     box-sizing: border-box; /* Ensure padding is included within the element's total width and height */
 }

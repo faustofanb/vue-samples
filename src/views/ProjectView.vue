@@ -1,29 +1,53 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-
-const modules = import.meta.glob('../components/small_project/*.vue')
-const links = Object.keys(modules).map((path) => {
-    const name = path.match(/\/([^/]+)\.vue$/)?.[1] || ''
-    return {
-        path: `/project/${name.toLowerCase()}`,
-        name: name.replace(/([A-Z])/g, ' $1').trim(), // 添加空格在大写字母前
-    }
-})
-</script>
-
 <template>
     <div class="project-view-wrapper">
         <nav class="project-nav">
             <h3>小项目演示</h3>
-            <RouterLink v-for="link in links" :key="link.path" :to="link.path" class="project-link">
+            <RouterLink
+                v-for="link in links"
+                :key="link.path"
+                :to="`/project/${link.path}`"
+                class="project-link"
+            >
                 <span class="dot"></span>{{ link.name }}
             </RouterLink>
         </nav>
         <div class="project-content">
-            <RouterView />
+            <component :is="currentComponent" v-if="currentComponent" />
+            <div v-else class="no-component">请选择一个项目以查看预览</div>
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { ref, computed, watch, defineAsyncComponent } from 'vue'
+
+const route = useRoute()
+const modules = import.meta.glob('../components/small_project/*.vue')
+
+// 生成导航链接
+const links = Object.keys(modules).map((path) => {
+    const fileName = path.match(/\/([^/]+)\.vue$/)?.[1] || ''
+    return {
+        path: fileName
+            .replace(/^\d+\.\s*/, '') // 移除数字前缀和点号
+            .toLowerCase() // 转换为小写
+            .replace(/\s+/g, '-'), // 将空格替换为连字符
+        name: fileName.replace(/^\d+\.\s*/, ''), // 保留显示名称的可读性
+        component: modules[path],
+    }
+})
+
+// 根据当前路由计算要显示的组件
+const currentComponent = computed(() => {
+    const currentPath = route.path.split('/').pop() // 获取路径的最后一部分
+    const matchedLink = links.find((link) => link.path === currentPath)
+    if (matchedLink) {
+        return defineAsyncComponent(matchedLink.component)
+    }
+    return null
+})
+</script>
 
 <style scoped>
 .project-view-wrapper {
@@ -102,5 +126,14 @@ const links = Object.keys(modules).map((path) => {
     padding: 36px 32px 32px 32px;
     overflow-y: auto;
     min-width: 0;
+}
+
+.no-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #64748b;
+    font-size: 16px;
 }
 </style>
